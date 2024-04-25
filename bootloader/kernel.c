@@ -12,6 +12,7 @@
 #define KERNEL_CODE_SEGMENT_OFFSET 0x08
 
 #define ENTER_KEY_CODE 0x1C
+#define TAB_KEY_CODE 0x0f
 
 extern unsigned char keyboard_map[128];
 extern void keyboard_handler(void);
@@ -104,6 +105,10 @@ void keyboard_handler_main(void) {
             return;
         if (keycode == ENTER_KEY_CODE) {
             kprint_newline();
+            return;
+        }
+        if (keycode == TAB_KEY_CODE) {
+            kprint("   ");
             return;
         }
         vidptr[current_loc++] = keyboard_map[(unsigned char)keycode];
